@@ -1,0 +1,37 @@
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: #f5f7fb;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-nav .nav-link.active {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.35rem;
+}
+
+.card {
+  border-radius: 0.85rem;
+}
+
+@media (max-width: 575.98px) {
+  .navbar-nav {
+    width: 100%;
+  }
+
+  .navbar-nav .nav-link {
+    padding-left: 0.55rem !important;
+    padding-right: 0.55rem !important;
+    font-size: 0.9rem;
+  }
+}

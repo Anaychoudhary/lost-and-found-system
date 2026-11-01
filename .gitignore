@@ -1,0 +1,14 @@
+# Local configuration and credentials
+**/application-local.properties
+!**/application-local.properties.example
+
+# Build output and installed dependencies
+/Frontend/node_modules/
+/Frontend/dist/
+/Frontend/.tsupgrader/
+/lostfound/target/
+
+# Workspace-specific files
+/.vscode/
+/.github/modernize/
+/package-lock.json
