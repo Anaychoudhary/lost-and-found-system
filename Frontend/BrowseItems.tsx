@@ -38,6 +38,31 @@ function toFoundBrowseItem(item: FoundItem): BrowseItem {
   };
 }
 
+function formatCategory(category: ItemCategory): string {
+  const labels: Record<ItemCategory, string> = {
+    ELECTRONICS: 'Electronics',
+    DOCUMENTS: 'ID & documents',
+    BAGS: 'Bags & wallets',
+    KEYS: 'Keys',
+    CLOTHING: 'Clothing',
+    OTHER: 'Other',
+  };
+  return labels[category];
+}
+
+function contactHref(contact: string): string | undefined {
+  const trimmedContact = contact.trim();
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedContact)) {
+    return `mailto:${trimmedContact}`;
+  }
+
+  const phoneNumber = trimmedContact.replace(/[^\d+]/g, '');
+  if (/^\+?\d{7,15}$/.test(phoneNumber)) {
+    return `tel:${phoneNumber}`;
+  }
+  return undefined;
+}
+
 export const BrowseItems: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('ALL');
@@ -78,69 +103,94 @@ export const BrowseItems: React.FC = () => {
   const filteredItems = items.filter((item) => filterType === 'ALL' || item.type === filterType);
 
   return (
-    <div className="container py-4">
-      <h2 className="mb-4 text-primary">Campus Item Directory</h2>
+    <div className="container py-4 py-lg-5">
+      <div className="mb-4">
+        <p className="page-eyebrow mb-2">Campus community</p>
+        <h1 className="h2 mb-2">Item directory</h1>
+        <p className="text-body-secondary mb-0">Browse recent reports and help reunite a neighbor with what they’ve lost.</p>
+      </div>
 
-      {/* Filter Controls Bar */}
-      <div className="row g-3 mb-4 bg-white p-3 rounded shadow-sm align-items-center">
-        <div className="col-md-5">
+      <div className="filter-bar row g-3 mb-4 p-3 p-lg-4 align-items-end">
+        <div className="col-lg-5">
+          <label className="form-label" htmlFor="item-search">Keyword</label>
           <input
+            id="item-search"
             type="text"
             className="form-control"
-            placeholder="Search by keyword..."
+            placeholder="Try “blue backpack”"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="col-md-3">
-          <select className="form-select" value={filterType} onChange={(e) => setFilterType(e.target.value)}>
-            <option value="ALL">All Types (Lost & Found)</option>
-            <option value="LOST">Lost Items Only</option>
-            <option value="FOUND">Found Items Only</option>
+        <div className="col-sm-6 col-lg-3">
+          <label className="form-label" htmlFor="type-filter">Report type</label>
+          <select id="type-filter" className="form-select" value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+            <option value="ALL">All types</option>
+            <option value="LOST">Lost items</option>
+            <option value="FOUND">Found items</option>
           </select>
         </div>
-        <div className="col-md-4">
-          <select className="form-select" value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
-            <option value="ALL">All Categories</option>
+        <div className="col-sm-6 col-lg-4">
+          <label className="form-label" htmlFor="category-filter">Category</label>
+          <select id="category-filter" className="form-select" value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
+            <option value="ALL">All categories</option>
             <option value="ELECTRONICS">Electronics</option>
-            <option value="DOCUMENTS">ID & Documents</option>
-            <option value="BAGS">Bags & Wallets</option>
+            <option value="DOCUMENTS">ID &amp; documents</option>
+            <option value="BAGS">Bags &amp; wallets</option>
+            <option value="KEYS">Keys</option>
+            <option value="CLOTHING">Clothing &amp; accessories</option>
+            <option value="OTHER">Other</option>
           </select>
         </div>
       </div>
 
-      {/* Cards Directory */}
       {error && <div className="alert alert-danger" role="alert">{error}</div>}
-      {loading && <p role="status">Loading item reports…</p>}
+      {loading && <p className="text-body-secondary py-3" role="status">Loading item reports…</p>}
       {!loading && !error && filteredItems.length === 0 && (
-        <div className="alert alert-info">No item reports match these filters.</div>
+        <div className="alert alert-info py-3">No item reports match these filters. Try changing your search or filters.</div>
       )}
-      <div className="row g-4">
+      <div className="row g-3 g-lg-4">
         {filteredItems.map((item) => (
-          <div key={`${item.type}-${item.id ?? item.title}`} className="col-md-4">
-            <div className="card border-0 shadow-sm h-100">
-              <div className="card-header bg-transparent d-flex justify-content-between align-items-center border-0 pt-3 px-3">
-                <span className={`badge ${item.type === 'LOST' ? 'bg-danger' : 'bg-info text-white'}`}>
-                  {item.type}
+          <div key={`${item.type}-${item.id ?? item.title}`} className="col-md-6 col-lg-4">
+            <article className="custom-card item-card h-100 d-flex flex-column">
+              <div className="item-card-header d-flex justify-content-between align-items-center px-4 py-3">
+                <span className={`badge rounded-pill px-3 py-2 ${item.type === 'LOST' ? 'item-type-lost' : 'item-type-found'}`}>
+                  {item.type === 'LOST' ? 'LOST ITEM' : 'FOUND ITEM'}
                 </span>
-                <span className="badge bg-secondary">#{item.id}</span>
+                <span className="small text-body-secondary">{item.id ? `Report #${item.id}` : 'Campus report'}</span>
               </div>
-              <div className="card-body">
-                <h5 className="card-title fw-bold mb-2">{item.title}</h5>
-                <p className="card-text text-muted mb-1">
-                  <strong>Location:</strong> {item.location}
-                </p>
-                <p className="card-text text-muted mb-2">
-                  <strong>Date:</strong> {item.date}
-                </p>
-                <div className="d-flex justify-content-between align-items-center mt-3">
-                  <span className={`badge ${item.status === 'RECOVERED' ? 'bg-success' : item.status === 'EXPIRED' ? 'bg-secondary' : 'bg-warning text-dark'}`}>
-                    Status: {item.status}
+              <div className="p-4 d-flex flex-column flex-grow-1">
+                <div className="d-flex flex-wrap gap-2 mb-3">
+                  <span className="badge-navy">{formatCategory(item.category)}</span>
+                  <span className={`badge rounded-pill px-3 py-2 ${item.status === 'RECOVERED' ? 'item-status-recovered' : 'item-status'}`}>
+                    {item.status ?? 'REPORTED'}
                   </span>
-                  <small className="text-primary text-decoration-underline cursor-pointer">{item.contact}</small>
+                </div>
+                <h2 className="h5 mb-3">{item.title}</h2>
+                <div className="item-meta d-flex align-items-center gap-2 mb-2">
+                  <svg viewBox="0 0 24 24" width="17" height="17" fill="none" aria-hidden="true">
+                    <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" strokeWidth="1.8" />
+                    <circle cx="12" cy="10" r="2" stroke="currentColor" strokeWidth="1.8" />
+                  </svg>
+                  <span>{item.location}</span>
+                </div>
+                <div className="item-meta d-flex align-items-center gap-2 mb-4">
+                  <svg viewBox="0 0 24 24" width="17" height="17" fill="none" aria-hidden="true">
+                    <rect x="4" y="5" width="16" height="15" rx="2" stroke="currentColor" strokeWidth="1.8" />
+                    <path d="M8 3v4m8-4v4M4 10h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                  </svg>
+                  <time dateTime={item.date}>{item.date}</time>
+                </div>
+                <div className="mt-auto pt-3 border-top d-flex flex-wrap justify-content-between align-items-center gap-2">
+                  <span className="small text-body-secondary">{item.type === 'LOST' ? 'Reported by' : 'Found by'}</span>
+                  {contactHref(item.contact) ? (
+                    <a className="contact-link" href={contactHref(item.contact)}>{item.contact}</a>
+                  ) : (
+                    <span className="contact-link">{item.contact}</span>
+                  )}
                 </div>
               </div>
-            </div>
+            </article>
           </div>
         ))}
       </div>

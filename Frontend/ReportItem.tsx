@@ -78,22 +78,27 @@ export const ReportItem: React.FC = () => {
   };
 
   return (
-    <div className="container py-4" style={{ maxWidth: '720px' }}>
-      <div className="card border-0 shadow-sm p-4">
-        <h2 className="mb-4 text-center text-primary">Submit Item Report</h2>
+    <div className="container report-container py-4 py-lg-5">
+      <div className="text-center mb-4">
+        <p className="page-eyebrow mb-2">Help bring it home</p>
+        <h1 className="h2 mb-2">Submit an item report</h1>
+        <p className="text-body-secondary mb-0">Share a few details so our campus community can help.</p>
+      </div>
 
-        {/* Report Type Selector */}
-        <div className="btn-group w-100 mb-4" role="group">
+      <section className="custom-card p-3 p-md-4 p-lg-5">
+        <div className="report-toggle mb-4" role="group" aria-label="Choose lost or found report">
           <button
             type="button"
-            className={`btn ${reportType === 'LOST' ? 'btn-danger' : 'btn-outline-danger'}`}
+            aria-pressed={reportType === 'LOST'}
+            className={`btn ${reportType === 'LOST' ? 'active-lost' : ''}`}
             onClick={() => selectReportType('LOST')}
           >
             I Lost Something
           </button>
           <button
             type="button"
-            className={`btn ${reportType === 'FOUND' ? 'btn-info text-white' : 'btn-outline-info'}`}
+            aria-pressed={reportType === 'FOUND'}
+            className={`btn ${reportType === 'FOUND' ? 'active-found' : ''}`}
             onClick={() => selectReportType('FOUND')}
           >
             I Found Something
@@ -108,7 +113,7 @@ export const ReportItem: React.FC = () => {
             </div>
           )}
           <div className="mb-3">
-            <label htmlFor="itemName" className="form-label fw-semibold">Item Title / Name</label>
+            <label htmlFor="itemName" className="form-label">Item title or name</label>
             <input
               id="itemName"
               type="text"
@@ -123,8 +128,8 @@ export const ReportItem: React.FC = () => {
 
           <div className="row g-3 mb-3">
             <div className="col-md-6">
-              <label htmlFor="category" className="form-label fw-semibold">Category</label>
-              <select name="category" className="form-select" value={formData.category} onChange={handleChange}>
+              <label htmlFor="category" className="form-label">Category</label>
+              <select id="category" name="category" className="form-select" value={formData.category} onChange={handleChange}>
                 <option value="ELECTRONICS">Electronics</option>
                 <option value="DOCUMENTS">ID Cards & Documents</option>
                 <option value="BAGS">Bags & Wallets</option>
@@ -134,9 +139,9 @@ export const ReportItem: React.FC = () => {
               </select>
             </div>
             <div className="col-md-6">
-              <label htmlFor="location" className="form-label fw-semibold">Campus Location</label>
-              <select name="location" className="form-select" value={formData.location} onChange={handleChange} required>
-                <option value="">Select Location</option>
+              <label htmlFor="location" className="form-label">Campus location</label>
+              <select id="location" name="location" className="form-select" value={formData.location} onChange={handleChange} required>
+                <option value="">Select a location</option>
                 <option value="Central Library">Central Library</option>
                 <option value="Main Canteen">Main Canteen</option>
                 <option value="Tech Block A">Tech Block A</option>
@@ -148,11 +153,11 @@ export const ReportItem: React.FC = () => {
 
           <div className="row g-3 mb-3">
             <div className="col-md-6">
-              <label htmlFor="date" className="form-label fw-semibold">{reportType === 'LOST' ? 'Date Lost' : 'Date Found'}</label>
+              <label htmlFor="date" className="form-label">{reportType === 'LOST' ? 'Date lost' : 'Date found'}</label>
               <input id="date" type="date" name="date" className="form-control" max={maxDate} required value={formData.date} onChange={handleChange} />
             </div>
             <div className="col-md-6">
-              <label htmlFor="contactInfo" className="form-label fw-semibold">Contact Info (Phone / Email)</label>
+              <label htmlFor="contactInfo" className="form-label">Contact information</label>
               <input
                 id="contactInfo"
                 type="text"
@@ -168,7 +173,7 @@ export const ReportItem: React.FC = () => {
 
           {reportType === 'FOUND' ? (
             <div className="mb-3">
-              <label htmlFor="storageLocation" className="form-label fw-semibold">Where is the item being stored?</label>
+              <label htmlFor="storageLocation" className="form-label">Where is the item being stored?</label>
               <input
                 id="storageLocation"
                 type="text"
@@ -181,7 +186,7 @@ export const ReportItem: React.FC = () => {
             </div>
           ) : (
             <div className="mb-3">
-              <label htmlFor="rewardOffered" className="form-label fw-semibold">Reward offered (optional)</label>
+              <label htmlFor="rewardOffered" className="form-label">Reward offered (optional)</label>
               <input
                 id="rewardOffered"
                 type="number"
@@ -196,7 +201,7 @@ export const ReportItem: React.FC = () => {
           )}
 
           <div className="mb-4">
-            <label htmlFor="description" className="form-label fw-semibold">Description & Identifiers</label>
+            <label htmlFor="description" className="form-label">Description &amp; identifiers</label>
             <textarea
               id="description"
               name="description"
@@ -208,11 +213,11 @@ export const ReportItem: React.FC = () => {
             ></textarea>
           </div>
 
-          <button type="submit" disabled={submitting} className={`btn w-100 btn-lg ${reportType === 'LOST' ? 'btn-danger' : 'btn-info text-white'}`}>
+          <button type="submit" disabled={submitting} className={`btn w-100 btn-lg ${reportType === 'LOST' ? 'btn-navy' : 'btn-gold'}`}>
             {submitting ? 'Saving…' : `Submit ${reportType === 'LOST' ? 'Lost' : 'Found'} Report`}
           </button>
         </form>
-      </div>
+      </section>
     </div>
   );
 };
