@@ -21,7 +21,6 @@ public class DashboardController {
         this.foundItemRepository = foundItemRepository;
     }
 
-    // READ: Fetch system metrics summary
     @GetMapping("/stats")
     public ResponseEntity<DashboardStatsDTO> getDashboardStats() {
         long totalLost = lostItemRepository.count();

@@ -1,0 +1,55 @@
+:root {
+  --primary-navy: #35506E;
+  --primary-navy-dark: #273D54;
+  --accent-gold: #EEB865;
+  --accent-gold-dark: #DFA44A;
+  --bg-canvas: #F4F6F8;
+  --card-shadow: 0 10px 30px rgba(53, 80, 110, 0.08);
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: #2D3748;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom Theme Buttons & Badges */
+.btn-navy {
+  background-color: var(--primary-navy);
+  color: #ffffff;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+.btn-navy:hover {
+  background-color: var(--primary-navy-dark);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-gold {
+  background-color: var(--accent-gold);
+  color: #1A2530;
+  font-weight: 600;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+.btn-gold:hover {
+  background-color: var(--accent-gold-dark);
+  color: #1A2530;
+  transform: translateY(-1px);
+}
+
+.bg-navy { background-color: var(--primary-navy) !important; }
+.bg-gold { background-color: var(--accent-gold) !important; }
+.text-navy { color: var(--primary-navy) !important; }
+.text-gold { color: var(--accent-gold-dark) !important; }
+
+.custom-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease;
+}
+.custom-card:hover {
+  transform: translateY(-2px);
+}
