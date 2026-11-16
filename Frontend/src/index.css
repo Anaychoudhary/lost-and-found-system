@@ -1,19 +1,21 @@
 :root {
   font-family: Inter, "Segoe UI", Arial, sans-serif;
-  color: #1A2533;
-  background: #F4F7FA;
+  color: #2C2B30;
+  background: #F5F5F6;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  --primary-navy: #35506E;
-  --primary-navy-dark: #213347;
-  --accent-gold: #EEB865;
-  --accent-gold-dark: #DDA34D;
-  --background-neutral: #F4F7FA;
+  --primary-navy: #2C2B30;
+  --primary-navy-dark: #2C2B30;
+  --accent-gold: #F58F7C;
+  --accent-gold-dark: #F58F7C;
+  --background-neutral: #F5F5F6;
   --surface-white: #FFFFFF;
-  --text-heading: #1A2533;
-  --text-body: #4A5568;
-  --card-shadow: 0 10px 25px -5px rgba(53, 80, 110, 0.08);
-  --card-shadow-hover: 0 18px 34px -10px rgba(53, 80, 110, 0.18);
+  --text-heading: #2C2B30;
+  --text-body: #4F4F51;
+  --border-subtle: #D6D6D6;
+  --accent-blush: #F2C4CE;
+  --card-shadow: 0 10px 25px -5px rgba(44, 43, 48, 0.08);
+  --card-shadow-hover: 0 18px 34px -10px rgba(44, 43, 48, 0.16);
 }
 
 * {
@@ -64,7 +66,7 @@ a {
   position: relative;
   z-index: 10;
   background: var(--primary-navy);
-  box-shadow: 0 4px 16px rgba(26, 37, 51, 0.12);
+  box-shadow: 0 4px 16px rgba(44, 43, 48, 0.12);
 }
 
 .app-navbar {
@@ -88,7 +90,7 @@ a {
   place-items: center;
   border-radius: 12px;
   background: var(--accent-gold);
-  color: var(--primary-navy-dark);
+  color: var(--primary-navy);
 }
 
 .app-navbar .navbar-nav {
@@ -123,13 +125,13 @@ a {
   left: 0.9rem;
   height: 2px;
   border-radius: 2px;
-  background: var(--accent-gold);
+  background: var(--accent-blush);
   content: "";
 }
 
 .campus-footer {
   padding: 1.3rem 0;
-  border-top: 1px solid rgba(53, 80, 110, 0.1);
+  border-top: 1px solid var(--border-subtle);
   background: var(--surface-white);
   color: var(--text-body);
   font-size: 0.86rem;
@@ -156,7 +158,7 @@ a {
   border-color: var(--primary-navy-dark);
   background: var(--primary-navy-dark);
   color: #fff;
-  box-shadow: 0 6px 16px rgba(53, 80, 110, 0.2);
+  box-shadow: 0 6px 16px rgba(44, 43, 48, 0.2);
 }
 
 .btn-gold {
@@ -170,7 +172,37 @@ a {
   border-color: var(--accent-gold-dark);
   background: var(--accent-gold-dark);
   color: var(--primary-navy-dark);
-  box-shadow: 0 6px 16px rgba(238, 184, 101, 0.25);
+  box-shadow: 0 6px 16px rgba(245, 143, 124, 0.25);
+}
+
+.btn-coral {
+  border: 1px solid var(--accent-gold);
+  background: var(--accent-gold);
+  color: var(--primary-navy);
+  font-weight: 750;
+}
+
+.btn-coral:hover,
+.btn-coral:focus-visible {
+  border-color: var(--accent-gold);
+  background: var(--accent-gold);
+  color: var(--primary-navy);
+  box-shadow: 0 6px 16px rgba(245, 143, 124, 0.25);
+}
+
+.btn-blush {
+  border: 1px solid var(--accent-blush);
+  background: var(--accent-blush);
+  color: var(--primary-navy);
+  font-weight: 750;
+}
+
+.btn-blush:hover,
+.btn-blush:focus-visible {
+  border-color: var(--accent-blush);
+  background: var(--accent-blush);
+  color: var(--primary-navy);
+  box-shadow: 0 6px 16px rgba(242, 196, 206, 0.25);
 }
 
 .btn-outline-navy {
@@ -186,7 +218,7 @@ a {
 }
 
 .custom-card {
-  border: 1px solid rgba(53, 80, 110, 0.06);
+  border: 1px solid var(--border-subtle);
   border-radius: 18px;
   background: var(--surface-white);
   box-shadow: var(--card-shadow);
@@ -195,7 +227,7 @@ a {
 
 .custom-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(53, 80, 110, 0.12);
+  border-color: rgba(79, 79, 81, 0.32);
   box-shadow: var(--card-shadow-hover);
 }
 
@@ -211,32 +243,33 @@ a {
 }
 
 .badge-gold {
-  background: rgba(238, 184, 101, 0.26);
+  background: var(--accent-blush);
   color: var(--primary-navy-dark);
 }
 
 .badge-navy {
-  background: rgba(53, 80, 110, 0.1);
+  background: rgba(44, 43, 48, 0.1);
   color: var(--primary-navy);
 }
 
 .form-control,
 .form-select {
   min-height: 48px;
-  border: 1px solid #D9E1E9;
+  border: 1px solid var(--border-subtle);
   border-radius: 10px;
   background-color: #fff;
   color: var(--text-heading);
 }
 
 .form-control::placeholder {
-  color: #8995A3;
+  color: var(--text-body);
+  opacity: 0.7;
 }
 
 .form-control:focus,
 .form-select:focus {
   border-color: var(--primary-navy);
-  box-shadow: 0 0 0 0.22rem rgba(53, 80, 110, 0.14);
+  box-shadow: 0 0 0 0.22rem rgba(44, 43, 48, 0.14);
 }
 
 textarea.form-control {
@@ -266,7 +299,7 @@ textarea.form-control {
   overflow: hidden;
   border-left: 5px solid var(--accent-gold);
   background: linear-gradient(115deg, var(--primary-navy) 0%, var(--primary-navy-dark) 100%);
-  box-shadow: 0 16px 35px rgba(33, 51, 71, 0.18);
+  box-shadow: 0 16px 35px rgba(44, 43, 48, 0.18);
 }
 
 .hero-banner h1,
@@ -282,6 +315,63 @@ textarea.form-control {
   text-transform: uppercase;
 }
 
+.action-card {
+  min-height: 270px;
+  border: 0;
+  border-radius: 18px;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  box-shadow: var(--card-shadow);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.action-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.action-card-lost {
+  background: #2C2B30;
+}
+
+.action-card-found {
+  background: #4F4F51;
+}
+
+.action-card h1,
+.action-card h2,
+.action-card p {
+  color: #fff;
+}
+
+.action-card .action-card-kicker {
+  color: #F2C4CE;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.action-card .action-card-description {
+  max-width: 34rem;
+  color: #D6D6D6;
+  line-height: 1.65;
+}
+
+.action-card-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 14px;
+  background: #F2C4CE;
+  color: #2C2B30;
+}
+
+.action-card .btn {
+  min-height: 48px;
+  padding-inline: 1.25rem;
+}
+
 .metric-card {
   min-height: 170px;
   padding: 1.5rem;
@@ -293,7 +383,7 @@ textarea.form-control {
   height: 48px;
   place-items: center;
   border-radius: 14px;
-  background: rgba(238, 184, 101, 0.24);
+  background: var(--accent-blush);
   color: var(--primary-navy);
 }
 
@@ -327,7 +417,7 @@ textarea.form-control {
 }
 
 .filter-bar {
-  border: 1px solid rgba(53, 80, 110, 0.08);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
   background: #fff;
   box-shadow: var(--card-shadow);
@@ -339,21 +429,21 @@ textarea.form-control {
 
 .item-card-header {
   min-height: 72px;
-  border-bottom: 1px solid rgba(53, 80, 110, 0.08);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .item-type-lost {
-  background: rgba(53, 80, 110, 0.1);
+  background: rgba(44, 43, 48, 0.1);
   color: var(--primary-navy);
 }
 
 .item-type-found {
-  background: rgba(238, 184, 101, 0.3);
+  background: var(--accent-blush);
   color: var(--primary-navy-dark);
 }
 
 .item-status {
-  background: rgba(53, 80, 110, 0.09);
+  background: rgba(44, 43, 48, 0.09);
   color: var(--primary-navy);
 }
 
@@ -388,7 +478,8 @@ textarea.form-control {
   grid-template-columns: 1fr 1fr;
   gap: 0.35rem;
   border-radius: 999px;
-  background: #EDF1F5;
+  background: #F5F5F6;
+  border: 1px solid var(--border-subtle);
   padding: 0.35rem;
 }
 
@@ -403,13 +494,13 @@ textarea.form-control {
 .report-toggle .btn.active-lost {
   background: var(--primary-navy);
   color: #fff;
-  box-shadow: 0 4px 10px rgba(53, 80, 110, 0.18);
+  box-shadow: 0 4px 10px rgba(44, 43, 48, 0.18);
 }
 
 .report-toggle .btn.active-found {
   background: var(--accent-gold);
   color: var(--primary-navy-dark);
-  box-shadow: 0 4px 10px rgba(238, 184, 101, 0.22);
+  box-shadow: 0 4px 10px rgba(245, 143, 124, 0.22);
 }
 
 .match-card {
@@ -429,7 +520,7 @@ textarea.form-control {
 
 .match-pair {
   height: 100%;
-  border: 1px solid rgba(53, 80, 110, 0.1);
+  border: 1px solid var(--border-subtle);
   border-radius: 14px;
   background: #fff;
   padding: 1.4rem;
@@ -457,15 +548,15 @@ textarea.form-control {
   height: 18px;
   place-items: center;
   border-radius: 50%;
-  background: var(--accent-gold);
-  color: var(--primary-navy-dark);
+  background: var(--accent-blush);
+  color: var(--primary-navy);
   content: "✓";
   font-size: 0.7rem;
   font-weight: 800;
 }
 
 .alert {
-  border: 1px solid rgba(53, 80, 110, 0.12);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
   color: var(--text-heading);
 }
@@ -473,7 +564,7 @@ textarea.form-control {
 .alert-danger,
 .alert-success,
 .alert-info {
-  border-color: rgba(53, 80, 110, 0.16);
+  border-color: var(--border-subtle);
   background: #fff;
   color: var(--text-heading);
 }
@@ -498,7 +589,7 @@ textarea.form-control {
 ::-webkit-scrollbar-thumb {
   border: 2px solid var(--background-neutral);
   border-radius: 999px;
-  background: #AAB7C5;
+  background: #D6D6D6;
 }
 
 ::-webkit-scrollbar-thumb:hover {
